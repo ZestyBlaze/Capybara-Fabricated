@@ -1,0 +1,29 @@
+{
+  "capybara.ambient": {
+    "subtitle": "subtitle.capybara.capybara.ambient",
+    "sounds": [
+      {
+        "name": "capybara:ambient_1"
+      },
+      {
+        "name": "capybara:ambient_2"
+      }
+    ]
+  },
+  "capybara.death": {
+    "subtitle": "subtitle.capybara.capybara.death",
+    "sounds": [
+      {
+        "name": "capybara:death"
+      }
+    ]
+  },
+  "capybara.hurt": {
+    "subtitle": "subtitle.capybara.capybara.hurt",
+    "sounds": [
+      {
+        "name": "capybara:hurt"
+      }
+    ]
+  }
+}
