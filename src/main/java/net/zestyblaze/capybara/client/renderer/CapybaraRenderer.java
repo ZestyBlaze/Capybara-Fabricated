@@ -16,7 +16,7 @@ public class CapybaraRenderer extends MobEntityRenderer<CapybaraEntity, Capybara
 
     public CapybaraRenderer(EntityRendererFactory.Context context) {
         super(context, new CapybaraModel(context.getPart(CapybaraClientInit.CAPYBARA_ENTITY)), 0.5f);
-        addFeature(new CapybaraChestLayer(this));
+        this.addFeature(new CapybaraChestLayer(this));
     }
 
     @Override

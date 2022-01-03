@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Capybara implements ModInitializer {
-
 	public static final String MODID = "capybara";
 	public static final String MODNAME = "Capybara";
 
@@ -15,7 +14,7 @@ public class Capybara implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info(MODNAME + " is installed correctly, loading now! Thanks for installing! <3");
+		LOGGER.info(MODNAME + " is downloaded, loading now! Thanks for installing! <3");
 		CapybaraConfigInit.registerConfig();
 		CapybaraItemInit.registerItems();
 		CapybaraEntityInit.registerEntities();

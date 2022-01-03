@@ -8,7 +8,7 @@ import net.zestyblaze.capybara.entity.CapybaraEntity;
 
 import java.util.Collections;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("ALL")
 public class CapybaraModel extends AnimalModel<CapybaraEntity> {
     private final ModelPart body;
     private final ModelPart rightBackLeg;

@@ -23,7 +23,7 @@ public class CapybaraChestLayer extends FeatureRenderer<CapybaraEntity, Capybara
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CapybaraEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         final int chestCount = entity.getChestCount();
         if(chestCount > 0) {
-            CapybaraModel model = getContextModel();
+            CapybaraModel model = this.getContextModel();
             model.animateModel(entity, limbAngle, limbDistance, tickDelta);
             model.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
             model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(chestCount > 1 ? DOUBLE_CHEST : SINGLE_CHEST)), light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
