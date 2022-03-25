@@ -185,7 +185,7 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
             }
             return ActionResult.SUCCESS;
         }
-        else if (!this.hasPassengers() && !player.shouldCancelInteraction() && !this.isBaby() && !isInSittingPose()) {
+        else if (!this.hasPassengers() && !player.shouldCancelInteraction() && !this.isBaby() && !isInSittingPose() && this.isTamed()) {
             boolean flag = this.isBreedingItem(player.getStackInHand(hand));
             if (!flag && !this.hasPassengers() && !player.shouldCancelInteraction()) {
                 if (!this.world.isClient) {
@@ -296,6 +296,27 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
 
     public int getChestCount() {
         return dataTracker.get(CHESTS);
+    }
+
+    public void setChests(int count) {
+        dataTracker.set(CHESTS, count);
+    }
+
+    @Override
+    protected void dropInventory() {
+        super.dropInventory();
+        if (getChestCount() > 0) {
+            if (!this.world.isClient) {
+                if(getChestCount() == 1) {
+                    this.dropItem(Blocks.CHEST);
+                }
+                if(getChestCount() == 2) {
+                    this.dropItem(Blocks.CHEST);
+                    this.dropItem(Blocks.CHEST);
+                }
+            }
+            this.setChests(0);
+        }
     }
 
     static class WaterPathNavigator extends MobNavigation {
