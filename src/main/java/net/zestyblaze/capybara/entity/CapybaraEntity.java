@@ -138,7 +138,7 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         final ItemStack stack = player.getStackInHand(hand);
-        if (player.isSneaking()) {
+        if (player.isSneaking() && !this.isBaby()) {
             if (stack.getItem() == Blocks.CHEST.asItem()) {
                 if (inventory == null || inventory.size() < 27) {
                     inventory = new SimpleInventory(27);
