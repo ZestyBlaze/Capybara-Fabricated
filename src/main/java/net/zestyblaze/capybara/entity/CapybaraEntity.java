@@ -4,6 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.*;
@@ -298,15 +299,11 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
         return dataTracker.get(CHESTS);
     }
 
-    public void setChests(int count) {
-        dataTracker.set(CHESTS, count);
-    }
-
     @Override
     protected void dropInventory() {
         super.dropInventory();
-        if (getChestCount() > 0) {
-            if (!this.world.isClient) {
+        if(getChestCount() > 0) {
+            if(!this.world.isClient) {
                 if(getChestCount() == 1) {
                     this.dropItem(Blocks.CHEST);
                 }
@@ -314,8 +311,15 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
                     this.dropItem(Blocks.CHEST);
                     this.dropItem(Blocks.CHEST);
                 }
+                if(this.inventory != null) {
+                    for(int i = 0; i < this.inventory.size(); i++) {
+                        ItemStack stack = this.inventory.getStack(i);
+                        if(!stack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(stack)) {
+                            this.dropStack(stack);
+                        }
+                    }
+                }
             }
-            this.setChests(0);
         }
     }
 
