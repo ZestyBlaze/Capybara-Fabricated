@@ -22,6 +22,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -45,6 +46,7 @@ import net.zestyblaze.capybara.registry.CapybaraEntityInit;
 import net.zestyblaze.capybara.registry.CapybaraSoundInit;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -138,66 +140,72 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        final ItemStack stack = player.getStackInHand(hand);
-        if (player.isSneaking() && !this.isBaby()) {
-            if (stack.getItem() == Blocks.CHEST.asItem() && this.isTamed()) {
-                if (inventory == null || inventory.size() < 27) {
-                    inventory = new SimpleInventory(27);
-                    dataTracker.set(CHESTS, 1);
-                    if (!player.getAbilities().creativeMode) {
-                        stack.decrement(1);
-                    }
-                    return ActionResult.SUCCESS;
-                }
-                else if (inventory.size() < 54) {
-                    Inventory inv = new SimpleInventory(54);
-                    for (int i = 0; i < 27; i++) {
-                        inv.setStack(i, inventory.getStack(i));
-                    }
-                    inventory = inv;
-                    dataTracker.set(CHESTS, 2);
-                    if (!player.getAbilities().creativeMode) {
-                        stack.decrement(1);
-                    }
-                    return ActionResult.SUCCESS;
-                }
-            }
-            if (stack.getItem() == Items.STICK) {
-                this.setSitting(!this.isSitting());
-            }
-            else {
-                player.openHandledScreen(this);
-                return ActionResult.SUCCESS;
-            }
-        }
-        else if (TEMPT_ITEMS.get().contains(stack.getItem()) && !isTamed()) {
-            if (this.random.nextInt(3) == 0) {
-                this.setOwner(player);
-                this.navigation.stop();
-                this.setTarget(null);
-                this.setSitting(true);
-                this.world.sendEntityStatus(this, (byte)7);
-            }
-            if (!player.getAbilities().creativeMode) {
-                stack.decrement(1);
-            }
-            else {
-                this.world.sendEntityStatus(this, (byte)6);
-            }
-            return ActionResult.SUCCESS;
-        }
-        else if (!this.hasPassengers() && !player.shouldCancelInteraction() && !this.isBaby() && !isInSittingPose() && this.isTamed()) {
-            boolean flag = this.isBreedingItem(player.getStackInHand(hand));
-            if (!flag && !this.hasPassengers() && !player.shouldCancelInteraction()) {
-                if (!this.world.isClient) {
-                    player.startRiding(this);
-                }
+        ItemStack stack = player.getStackInHand(hand);
+        Item item = stack.getItem();
 
+        if(!this.world.isClient()) {
+            if (this.isBreedingItem(stack) && this.getHealth() < this.getMaxHealth()) {
+                if (!player.getAbilities().creativeMode) {
+                    stack.decrement(1);
+                }
+                this.heal((float) Objects.requireNonNull(item.getFoodComponent()).getHunger());
                 return ActionResult.SUCCESS;
             }
-        }
-        else if (!this.getPassengerList().isEmpty()) {
-            removeAllPassengers();
+
+            if (player.isSneaking() && !this.isBaby()) {
+                if (stack.getItem() == Blocks.CHEST.asItem() && this.isTamed()) {
+                    if (inventory == null || inventory.size() < 27) {
+                        inventory = new SimpleInventory(27);
+                        dataTracker.set(CHESTS, 1);
+                        if (!player.getAbilities().creativeMode) {
+                            stack.decrement(1);
+                        }
+                        return ActionResult.SUCCESS;
+                    } else if (inventory.size() < 54) {
+                        Inventory inv = new SimpleInventory(54);
+                        for (int i = 0; i < 27; i++) {
+                            inv.setStack(i, inventory.getStack(i));
+                        }
+                        inventory = inv;
+                        dataTracker.set(CHESTS, 2);
+                        if (!player.getAbilities().creativeMode) {
+                            stack.decrement(1);
+                        }
+                        return ActionResult.SUCCESS;
+                    }
+                }
+                if (stack.getItem() == Items.STICK) {
+                    this.setSitting(!this.isSitting());
+                } else {
+                    player.openHandledScreen(this);
+                    return ActionResult.SUCCESS;
+                }
+            } else if (TEMPT_ITEMS.get().contains(stack.getItem()) && !isTamed()) {
+                if (this.random.nextInt(3) == 0) {
+                    this.setOwner(player);
+                    this.navigation.stop();
+                    this.setTarget(null);
+                    this.setSitting(true);
+                    this.world.sendEntityStatus(this, (byte) 7);
+                }
+                if (!player.getAbilities().creativeMode) {
+                    stack.decrement(1);
+                } else {
+                    this.world.sendEntityStatus(this, (byte) 6);
+                }
+                return ActionResult.SUCCESS;
+            } else if (!this.hasPassengers() && !player.shouldCancelInteraction() && !this.isBaby() && !isInSittingPose() && this.isTamed()) {
+                boolean flag = this.isBreedingItem(player.getStackInHand(hand));
+                if (!flag && !this.hasPassengers() && !player.shouldCancelInteraction()) {
+                    if (!this.world.isClient) {
+                        player.startRiding(this);
+                    }
+
+                    return ActionResult.SUCCESS;
+                }
+            } else if (!this.getPassengerList().isEmpty()) {
+                removeAllPassengers();
+            }
         }
         return super.interactMob(player, hand);
     }
