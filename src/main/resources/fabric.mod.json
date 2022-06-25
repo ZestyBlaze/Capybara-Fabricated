@@ -36,6 +36,6 @@
     "fabric": "*",
     "minecraft": "1.18.x",
     "java": ">=17",
-    "cloth-config2": ">=7.0.69"
+    "cloth-config2": ">=6.2.62"
   }
 }
