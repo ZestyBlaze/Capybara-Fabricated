@@ -1,10 +1,10 @@
-package net.zestyblaze.capybara.config;
+package net.teamdraco.capybara.config;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import net.zestyblaze.capybara.Capybara;
+import net.teamdraco.capybara.Capybara;
 
 @Config(name = Capybara.MODID)
 public class CapybaraModConfig implements ConfigData {

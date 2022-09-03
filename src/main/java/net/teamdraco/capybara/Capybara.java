@@ -1,8 +1,8 @@
-package net.zestyblaze.capybara;
+package net.teamdraco.capybara;
 
 import net.fabricmc.api.ModInitializer;
-import net.zestyblaze.capybara.config.CapybaraModConfig;
-import net.zestyblaze.capybara.registry.*;
+import net.teamdraco.capybara.config.CapybaraModConfig;
+import net.teamdraco.capybara.registry.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

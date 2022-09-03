@@ -1,10 +1,10 @@
-package net.zestyblaze.capybara.client.model;
+package net.teamdraco.capybara.client.model;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.util.math.MathHelper;
-import net.zestyblaze.capybara.entity.CapybaraEntity;
+import net.teamdraco.capybara.entity.CapybaraEntity;
 
 import java.util.Collections;
 

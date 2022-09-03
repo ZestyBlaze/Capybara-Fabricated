@@ -1,4 +1,4 @@
-package net.zestyblaze.capybara.entity.ai;
+package net.teamdraco.capybara.entity.ai;
 
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.MobEntity;

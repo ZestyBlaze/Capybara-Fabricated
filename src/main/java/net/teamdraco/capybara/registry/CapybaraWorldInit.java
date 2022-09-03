@@ -1,11 +1,11 @@
-package net.zestyblaze.capybara.registry;
+package net.teamdraco.capybara.registry;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.tag.BiomeTags;
-import net.zestyblaze.capybara.Capybara;
-import net.zestyblaze.capybara.config.CapybaraModConfig;
+import net.teamdraco.capybara.Capybara;
+import net.teamdraco.capybara.config.CapybaraModConfig;
 
 public class CapybaraWorldInit {
     public static void registerSpawns() {

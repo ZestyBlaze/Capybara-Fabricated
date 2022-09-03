@@ -1,4 +1,4 @@
-package net.zestyblaze.capybara.registry;
+package net.teamdraco.capybara.registry;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
@@ -6,7 +6,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.zestyblaze.capybara.Capybara;
+import net.teamdraco.capybara.Capybara;
 
 public class CapybaraItemInit {
 

@@ -1,4 +1,4 @@
-package net.zestyblaze.capybara.entity;
+package net.teamdraco.capybara.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -41,9 +41,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Lazy;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.zestyblaze.capybara.entity.ai.CapybaraAnimalAttractionGoal;
-import net.zestyblaze.capybara.registry.CapybaraEntityInit;
-import net.zestyblaze.capybara.registry.CapybaraSoundInit;
+import net.teamdraco.capybara.entity.ai.CapybaraAnimalAttractionGoal;
+import net.teamdraco.capybara.registry.CapybaraEntityInit;
+import net.teamdraco.capybara.registry.CapybaraSoundInit;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;

@@ -1,10 +1,10 @@
-package net.zestyblaze.capybara.registry;
+package net.teamdraco.capybara.registry;
 
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.zestyblaze.capybara.Capybara;
-import net.zestyblaze.capybara.config.CapybaraModConfig;
+import net.teamdraco.capybara.Capybara;
+import net.teamdraco.capybara.config.CapybaraModConfig;
 
 public class CapybaraSoundInit {
     public static SoundEvent CAPYBARA_AMBIENT = new SoundEvent(new Identifier(Capybara.MODID, "capybara.ambient"));

@@ -1,14 +1,14 @@
-package net.zestyblaze.capybara.client.renderer;
+package net.teamdraco.capybara.client.renderer;
 
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.zestyblaze.capybara.Capybara;
-import net.zestyblaze.capybara.client.model.CapybaraModel;
-import net.zestyblaze.capybara.client.renderer.layer.CapybaraChestLayer;
-import net.zestyblaze.capybara.entity.CapybaraEntity;
-import net.zestyblaze.capybara.registry.CapybaraClientInit;
+import net.teamdraco.capybara.Capybara;
+import net.teamdraco.capybara.client.model.CapybaraModel;
+import net.teamdraco.capybara.client.renderer.layer.CapybaraChestLayer;
+import net.teamdraco.capybara.entity.CapybaraEntity;
+import net.teamdraco.capybara.registry.CapybaraClientInit;
 
 public class CapybaraRenderer extends MobEntityRenderer<CapybaraEntity, CapybaraModel> {
     private static final Identifier TEXTURE = new Identifier(Capybara.MODID, "textures/entity/capybara.png");
