@@ -150,14 +150,6 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
                 return ActionResult.SUCCESS;
             }
 
-            /*
-            if(player.isSneaking()) {
-                player.openHandledScreen(this);
-                return ActionResult.SUCCESS;
-            }
-
-             */
-
             if (player.isSneaking() && !this.isBaby()) {
                 if (stack.getItem() == Blocks.CHEST.asItem() && this.isTamed()) {
                     if (inventory == null || inventory.size() < 27) {
