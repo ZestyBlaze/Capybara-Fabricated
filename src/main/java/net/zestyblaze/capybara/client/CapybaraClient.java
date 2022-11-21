@@ -1,9 +1,9 @@
-package net.teamdraco.capybara.client;
+package net.zestyblaze.capybara.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.teamdraco.capybara.registry.CapybaraClientInit;
+import net.zestyblaze.capybara.registry.CapybaraClientInit;
 
 @Environment(EnvType.CLIENT)
 public class CapybaraClient implements ClientModInitializer {

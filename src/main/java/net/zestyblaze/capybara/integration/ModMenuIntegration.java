@@ -1,11 +1,11 @@
-package net.teamdraco.capybara.integration;
+package net.zestyblaze.capybara.integration;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.teamdraco.capybara.config.CapybaraModConfig;
+import net.zestyblaze.capybara.config.CapybaraModConfig;
 
 @Environment(EnvType.CLIENT)
 public class ModMenuIntegration implements ModMenuApi {

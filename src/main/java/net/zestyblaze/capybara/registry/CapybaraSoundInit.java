@@ -1,10 +1,9 @@
-package net.teamdraco.capybara.registry;
+package net.zestyblaze.capybara.registry;
 
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.teamdraco.capybara.Capybara;
-import net.teamdraco.capybara.config.CapybaraModConfig;
+import net.zestyblaze.capybara.Capybara;
 
 public class CapybaraSoundInit {
     public static SoundEvent CAPYBARA_AMBIENT = new SoundEvent(new Identifier(Capybara.MODID, "capybara.ambient"));
@@ -15,9 +14,5 @@ public class CapybaraSoundInit {
         Registry.register(Registry.SOUND_EVENT, new Identifier(Capybara.MODID, "capybara.ambient"), CAPYBARA_AMBIENT);
         Registry.register(Registry.SOUND_EVENT, new Identifier(Capybara.MODID, "capybara.death"), CAPYBARA_DEATH);
         Registry.register(Registry.SOUND_EVENT, new Identifier(Capybara.MODID, "capybara.hurt"), CAPYBARA_HURT);
-
-        if(CapybaraModConfig.get().debugMode) {
-            Capybara.LOGGER.info("Capybara: Registry - Sounds Registered");
-        }
     }
 }

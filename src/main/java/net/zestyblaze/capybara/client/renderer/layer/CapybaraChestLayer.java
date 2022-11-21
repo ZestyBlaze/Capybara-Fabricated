@@ -1,4 +1,4 @@
-package net.teamdraco.capybara.client.renderer.layer;
+package net.zestyblaze.capybara.client.renderer.layer;
 
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -7,9 +7,9 @@ import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.teamdraco.capybara.Capybara;
-import net.teamdraco.capybara.client.model.CapybaraModel;
-import net.teamdraco.capybara.entity.CapybaraEntity;
+import net.zestyblaze.capybara.Capybara;
+import net.zestyblaze.capybara.client.model.CapybaraModel;
+import net.zestyblaze.capybara.entity.CapybaraEntity;
 
 public class CapybaraChestLayer extends FeatureRenderer<CapybaraEntity, CapybaraModel> {
     private static final Identifier SINGLE_CHEST = new Identifier(Capybara.MODID, "textures/entity/single_chest.png");

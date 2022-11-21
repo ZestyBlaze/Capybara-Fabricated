@@ -1,4 +1,4 @@
-package net.teamdraco.capybara.entity;
+package net.zestyblaze.capybara.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -41,9 +41,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Lazy;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.teamdraco.capybara.entity.ai.CapybaraAnimalAttractionGoal;
-import net.teamdraco.capybara.registry.CapybaraEntityInit;
-import net.teamdraco.capybara.registry.CapybaraSoundInit;
+import net.zestyblaze.capybara.entity.ai.CapybaraAnimalAttractionGoal;
+import net.zestyblaze.capybara.registry.CapybaraEntityInit;
+import net.zestyblaze.capybara.registry.CapybaraSoundInit;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -76,9 +76,7 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
         this.goalSelector.add(7, new WanderAroundGoal(this, 1.0d));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
         this.goalSelector.add(8, new LookAroundGoal(this));
-        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
-        this.goalSelector.add(9, new LookAroundGoal(this));
-        this.goalSelector.add(10, new CapybaraAnimalAttractionGoal(this));
+        this.goalSelector.add(9, new CapybaraAnimalAttractionGoal(this));
     }
 
     @Override
@@ -126,7 +124,7 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if(this.isInvulnerableTo(source)) {
+        if(this.isInvulnerableTo(source) || source.getAttacker() == getOwner()) {
             return false;
         } else {
             Entity entity = source.getAttacker();
@@ -152,6 +150,14 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
                 return ActionResult.SUCCESS;
             }
 
+            /*
+            if(player.isSneaking()) {
+                player.openHandledScreen(this);
+                return ActionResult.SUCCESS;
+            }
+
+             */
+
             if (player.isSneaking() && !this.isBaby()) {
                 if (stack.getItem() == Blocks.CHEST.asItem() && this.isTamed()) {
                     if (inventory == null || inventory.size() < 27) {
@@ -173,19 +179,14 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
                         }
                         return ActionResult.SUCCESS;
                     }
-                }
-                if (stack.getItem() == Items.STICK) {
+                } else if (stack.getItem() == Items.STICK && !this.isBaby()) {
                     this.setSitting(!this.isSitting());
-                } else {
-                    player.openHandledScreen(this);
-                    return ActionResult.SUCCESS;
                 }
             } else if (TEMPT_ITEMS.get().contains(stack.getItem()) && !isTamed()) {
                 if (this.random.nextInt(3) == 0) {
                     this.setOwner(player);
                     this.navigation.stop();
                     this.setTarget(null);
-                    this.setSitting(true);
                     this.world.sendEntityStatus(this, (byte) 7);
                 }
                 if (!player.getAbilities().creativeMode) {
@@ -194,17 +195,9 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
                     this.world.sendEntityStatus(this, (byte) 6);
                 }
                 return ActionResult.SUCCESS;
-            } else if (!this.hasPassengers() && !player.shouldCancelInteraction() && !this.isBaby() && !isInSittingPose() && this.isTamed()) {
-                boolean flag = this.isBreedingItem(player.getStackInHand(hand));
-                if (!flag && !this.hasPassengers() && !player.shouldCancelInteraction()) {
-                    if (!this.world.isClient) {
-                        player.startRiding(this);
-                    }
-
-                    return ActionResult.SUCCESS;
-                }
-            } else if (!this.getPassengerList().isEmpty()) {
-                removeAllPassengers();
+            } else if (!this.isBaby() && this.isTamed()) {
+                player.openHandledScreen(this);
+                return ActionResult.SUCCESS;
             }
         }
         return super.interactMob(player, hand);
@@ -311,13 +304,11 @@ public class CapybaraEntity extends TameableEntity implements NamedScreenHandler
         super.dropInventory();
         if(getChestCount() > 0) {
             if(!this.world.isClient) {
-                if(getChestCount() == 1) {
+                int c;
+                for(c = 0; c < getChestCount(); c++) {
                     this.dropItem(Blocks.CHEST);
                 }
-                if(getChestCount() == 2) {
-                    this.dropItem(Blocks.CHEST);
-                    this.dropItem(Blocks.CHEST);
-                }
+
                 if(this.inventory != null) {
                     for(int i = 0; i < this.inventory.size(); i++) {
                         ItemStack stack = this.inventory.getStack(i);

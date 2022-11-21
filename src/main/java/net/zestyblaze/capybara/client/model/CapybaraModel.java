@@ -1,14 +1,13 @@
-package net.teamdraco.capybara.client.model;
+package net.zestyblaze.capybara.client.model;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.util.math.MathHelper;
-import net.teamdraco.capybara.entity.CapybaraEntity;
+import net.zestyblaze.capybara.entity.CapybaraEntity;
 
 import java.util.Collections;
 
-@SuppressWarnings("ALL")
 public class CapybaraModel extends AnimalModel<CapybaraEntity> {
     private final ModelPart body;
     private final ModelPart rightBackLeg;
