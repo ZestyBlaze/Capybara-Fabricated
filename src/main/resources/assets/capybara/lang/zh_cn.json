@@ -11,5 +11,6 @@
   "text.autoconfig.capybara.option.debugMode": "调试模式",
   "text.autoconfig.capybara.option.spawnWeight": "水豚生成权重",
   "text.autoconfig.capybara.option.minGroupSize": "水豚最小组数量",
-  "text.autoconfig.capybara.option.maxGroupSize": "水豚最大组数量"
+  "text.autoconfig.capybara.option.maxGroupSize": "水豚最大组数量",
+  "text.autoconfig.capybara.option.animalAttractionGoal": "水豚动物吸引目标"
 }
